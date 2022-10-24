@@ -12,7 +12,9 @@ public class CardComponent extends Component {
   private TransformComponent position;
 
   private int speed = 30;
-  private boolean moving;
+  private boolean moving = false;
+
+  private boolean purchased = false;
 
   @Override
   public void onUpdate(double tpf) {
@@ -36,15 +38,21 @@ public class CardComponent extends Component {
   }
 
   public void trigger() {
-    Button button = new Button("Buy");
-    button.setTranslateX(600);
-    button.setTranslateY(300);
-    button.setOnAction(e -> {cardAnimation(); button.setVisible(false);});
-    FXGL.getGameScene().addUINode(button);
+    if(!purchased) {
+      Button button = new Button("Buy");
+      button.setTranslateX(600);
+      button.setTranslateY(300);
+      button.setOnAction(e -> {
+        cardAnimation();
+        button.setVisible(false);
+      });
+      FXGL.getGameScene().addUINode(button);
+    }
   }
 
   public void cardAnimation(){
     moving = true;
+    purchased = true;
     }
   }
 
