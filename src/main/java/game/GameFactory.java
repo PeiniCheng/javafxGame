@@ -3,30 +3,37 @@ package game;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
-import com.almasb.fxgl.entity.Spawns;
 import game.components.CardComponent;
-import game.components.LevelThreeCardComponent;
-import game.components.LevelTwoCardComponent;
 
 public class GameFactory implements EntityFactory {
 
-  @Spawns("card")
-
-  public Entity newLevelTwoCard(){
+  private String levelOne = "sample_one";
+  private String levelTwo = "sample_two";
+  private String levelThree = "sample_three";
+  public Entity newLevelOneCard(int i){
     return FXGL.entityBuilder()
-        .at(410, 455)
-        .view("sample_red.png")
+        .at(410, 665)
+        .view(levelOne+i+".png")
         .scale(0.15, 0.15)
-        .with(new LevelTwoCardComponent())
+        .with(new CardComponent(Level.ONE))
         .build();
   }
 
-  public Entity newLevelThreeCard(){
+  public Entity newLevelTwoCard(int i){
+    return FXGL.entityBuilder()
+        .at(410, 460)
+        .view(levelTwo+i+".png")
+        .scale(0.15, 0.15)
+        .with(new CardComponent(Level.TWO))
+        .build();
+  }
+
+  public Entity newLevelThreeCard(int i){
     return FXGL.entityBuilder()
         .at(410, 255)
-        .view("sample_blue.png")
+        .view(levelThree+i+".png")
         .scale(0.15, 0.15)
-        .with(new LevelThreeCardComponent())
+        .with(new CardComponent(Level.THREE))
         .build();
   }
 
@@ -38,7 +45,22 @@ public class GameFactory implements EntityFactory {
         .build();
   }
 
-  public Entity buildBackground() {
+  public Entity levelTwo(){
+    return FXGL.entityBuilder()
+        .at(410, 460)
+        .view("level_two.png")
+        .scale(0.15, 0.15)
+        .build();
+  }
+
+  public Entity levelOne(){
+    return FXGL.entityBuilder()
+        .at(410, 665)
+        .view("level_one.png")
+        .scale(0.15, 0.15)
+        .build();
+  }
+  public Entity buildMat() {
     return FXGL.entityBuilder()
         .at(400,100)
         .view("mat.png")

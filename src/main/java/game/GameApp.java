@@ -3,13 +3,18 @@ package game;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
+import java.util.Stack;
 
 public class GameApp extends GameApplication {
   private GameFactory gameFactory;
 
-  private int[] level_one = {1,2,1,1,2,1,1,2,2,2};
-  private int[] level_two = {1,2,1,1,2,1,1,2,2,2};
-  private int[] level_three = {1,2,1,1,2,1,1,2,2,2};
+  private Stack<Integer> level_one = new Stack<>();
+  private Stack<Integer> level_two = new Stack<>();
+  private Stack<Integer> level_three = new Stack<>();
+
+  private static int[] level_one_list = {1,0,0,0,1,1,0,1,1,1};
+  private static int[] level_two_list = {1,0,0,0,1,1,0,1,0,0};
+  private static int[] level_three_list = {1,0,0,0,1,1,0,0,0,1};
 
   @Override
   protected void initSettings(GameSettings settings){
@@ -20,12 +25,24 @@ public class GameApp extends GameApplication {
   @Override
   protected void initGame() {
     gameFactory = new GameFactory();
-    FXGL.getGameWorld().addEntities(gameFactory.buildBackground());
+    for(int i = 0; i < level_one_list.length; i++){
+      level_one.push(level_one_list[i]);
+    }
+    for(int i = 0; i < level_two_list.length; i++){
+      level_two.push(level_two_list[i]);
+    }
+    for(int i = 0; i < level_three_list.length; i++){
+      level_three.push(level_three_list[i]);
+    }
+    FXGL.getGameWorld().addEntities(gameFactory.buildMat());
+    FXGL.getGameWorld().addEntities(gameFactory.levelOne());
+    FXGL.getGameWorld().addEntities(gameFactory.levelTwo());
     FXGL.getGameWorld().addEntities(gameFactory.levelThree());
-    FXGL.getGameWorld().addEntity(gameFactory.newLevelTwoCard());
-    FXGL.getGameWorld().addEntity(gameFactory.newLevelTwoCard());
-    FXGL.getGameWorld().addEntity(gameFactory.newLevelThreeCard());
-    FXGL.getGameWorld().addEntity(gameFactory.newLevelThreeCard());
+    for(int i = 0; i < 4; i++) {
+      FXGL.getGameWorld().addEntity(gameFactory.newLevelOneCard(level_one.pop()));
+      FXGL.getGameWorld().addEntity(gameFactory.newLevelTwoCard(level_two.pop()));
+      FXGL.getGameWorld().addEntity(gameFactory.newLevelThreeCard(level_three.pop()));
+    }
   }
 
   @Override
@@ -43,10 +60,14 @@ public class GameApp extends GameApplication {
   }
 
   public void addLevelThreeCard(){
-    FXGL.getGameWorld().addEntity(gameFactory.newLevelThreeCard());
+    if(!level_three.empty()) FXGL.getGameWorld().addEntity(gameFactory.newLevelThreeCard(level_three.pop()));
   }
 
   public void addLevelTwoCard(){
-    FXGL.getGameWorld().addEntity(gameFactory.newLevelTwoCard());
+    if(!level_two.empty()) FXGL.getGameWorld().addEntity(gameFactory.newLevelTwoCard(level_two.pop()));
+  }
+
+  public void addLevelOneCard(){
+    if(!level_one.empty()) FXGL.getGameWorld().addEntity(gameFactory.newLevelOneCard(level_one.pop()));
   }
 }
