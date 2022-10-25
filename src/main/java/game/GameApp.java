@@ -15,7 +15,11 @@ public class GameApp extends GameApplication {
   @Override
   protected void initGame() {
     gameFactory = new GameFactory();
-    FXGL.getGameWorld().addEntity(gameFactory.newCard());
+    FXGL.getGameWorld().addEntities(gameFactory.buildBackground());
+    FXGL.getGameWorld().addEntity(gameFactory.newRedCard());
+    FXGL.getGameWorld().addEntity(gameFactory.newRedCard());
+    FXGL.getGameWorld().addEntity(gameFactory.newBlueCard());
+    FXGL.getGameWorld().addEntity(gameFactory.newBlueCard());
   }
 
   @Override

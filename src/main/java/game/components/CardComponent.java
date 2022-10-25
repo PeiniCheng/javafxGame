@@ -11,6 +11,7 @@ public class CardComponent extends Component {
   private ViewComponent view;
   private TransformComponent position;
 
+  private static boolean grid[] = new boolean[4];
   private int speed = 30;
   private boolean moving = false;
 
@@ -25,23 +26,30 @@ public class CardComponent extends Component {
 
     if (diff > 0) {
       speed *= 0.97;
-      position.translateX(speed*2);
       position.translateY(speed);
     } else {
       moving = false;
+      view.setVisible(false);
     }
   }
 
   @Override
   public void onAdded() {
     view.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> trigger());
+    for(int i = 0; i < grid.length; i++){
+        if (!grid[i]){
+          position.setPosition(270+116*i, 190);
+          grid[i] = true;
+          break;
+      }
+    }
   }
 
   public void trigger() {
     if(!purchased) {
       Button button = new Button("Buy");
       button.setTranslateX(600);
-      button.setTranslateY(300);
+      button.setTranslateY(500);
       button.setOnAction(e -> {
         cardAnimation();
         button.setVisible(false);
