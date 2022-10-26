@@ -68,4 +68,12 @@ public class GameFactory implements EntityFactory {
         .build();
   }
 
+  public Entity buildBackground() {
+    return FXGL.entityBuilder()
+        .at(0,0)
+        .view("background.png")
+        .scale(1, 1)
+        .build();
+  }
+
 }

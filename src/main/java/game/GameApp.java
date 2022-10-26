@@ -34,6 +34,7 @@ public class GameApp extends GameApplication {
     for(int i = 0; i < level_three_list.length; i++){
       level_three.push(level_three_list[i]);
     }
+    FXGL.getGameWorld().addEntities(gameFactory.buildBackground());
     FXGL.getGameWorld().addEntities(gameFactory.buildMat());
     FXGL.getGameWorld().addEntities(gameFactory.levelOne());
     FXGL.getGameWorld().addEntities(gameFactory.levelTwo());
