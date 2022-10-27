@@ -4,12 +4,14 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import game.components.CardComponent;
+import game.components.NobleComponent;
 
 public class GameFactory implements EntityFactory {
 
   private String levelOne = "level_one";
   private String levelTwo = "level_two";
   private String levelThree = "level_three";
+  
   public Entity newLevelOneCard(int i){
     return FXGL.entityBuilder()
         .at(410, 665)
@@ -59,6 +61,14 @@ public class GameFactory implements EntityFactory {
         .view("level_one.png")
         .scale(0.15, 0.15)
         .build();
+  }
+  
+  public Entity newNoble(int i) {
+	  return FXGL.entityBuilder()
+		 .view("noble"+i+".png")
+		 .with(new NobleComponent())
+		 .scale(0.15, 0.15)
+		 .build();
   }
   public Entity buildMat() {
     return FXGL.entityBuilder()

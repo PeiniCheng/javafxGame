@@ -39,6 +39,7 @@ public class CardComponent extends Component {
   enum Direction{
     DOWN, RIGHT, LEFT, UP
   }
+  
   @Override
   public void onUpdate(double tpf) {
     if (moving) {
@@ -201,7 +202,7 @@ public class CardComponent extends Component {
     buttonRight.setVisible(boo);
   }
 
-    private void addToMat(boolean[] aGrid){
+  private void addToMat(boolean[] aGrid){
       for (int i = 0; i < aGrid.length; i++) {
         if (!aGrid[i]) {
           gridX = i;
