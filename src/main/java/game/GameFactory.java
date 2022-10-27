@@ -7,9 +7,9 @@ import game.components.CardComponent;
 
 public class GameFactory implements EntityFactory {
 
-  private String levelOne = "sample_one";
-  private String levelTwo = "sample_two";
-  private String levelThree = "sample_three";
+  private String levelOne = "level_one";
+  private String levelTwo = "level_two";
+  private String levelThree = "level_three";
   public Entity newLevelOneCard(int i){
     return FXGL.entityBuilder()
         .at(410, 665)
