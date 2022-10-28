@@ -24,12 +24,12 @@ import java.util.Stack;
 
 public class GameApp extends GameApplication {
   private GameFactory gameFactory;
-
   private Stack<Integer> level_one = new Stack<>();
   private Stack<Integer> level_two = new Stack<>();
   private Stack<Integer> level_three = new Stack<>();
   private Stack<Integer> nobles = new Stack<>();
 
+  //for demo use only: lists of cards returned by the server
   private static int[] level_one_list = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39};
   private static int[] level_two_list = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29};
   private static int[] level_three_list = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
@@ -63,6 +63,7 @@ public class GameApp extends GameApplication {
     FXGL.getGameWorld().addEntities(gameFactory.levelOne());
     FXGL.getGameWorld().addEntities(gameFactory.levelTwo());
     FXGL.getGameWorld().addEntities(gameFactory.levelThree());
+    
     for(int i = 0; i < 4; i++) {
       addLevelOneCard();
       addLevelTwoCard();
@@ -75,32 +76,9 @@ public class GameApp extends GameApplication {
 
   @Override
   protected void initUI() {
-	  Text level_one_quantity = new Text();
-	  level_one_quantity.setFill(Color.WHITE);
-	  level_one_quantity.setFont(Font.font(50));
-	  level_one_quantity.setTranslateX(450);
-	  level_one_quantity.setTranslateY(getAppHeight() - 370);
-	  level_one_quantity.textProperty().bind(getip("level_one_quantity").asString());
-	  addUINode(level_one_quantity);
-	  Text level_two_quantity = new Text();
-	  level_two_quantity.setFill(Color.WHITE);
-	  level_two_quantity.setFont(Font.font(50));
-	  level_two_quantity.setTranslateX(450);
-	  level_two_quantity.setTranslateY(getAppHeight() - 575);
-	  level_two_quantity.textProperty().bind(getip("level_two_quantity").asString());
-	  addUINode(level_two_quantity);
-	  Text level_three_quantity = new Text();
-	  level_three_quantity.setFill(Color.WHITE);
-	  level_three_quantity.setFont(Font.font(50));
-	  level_three_quantity.setTranslateX(450);
-	  level_three_quantity.setTranslateY(getAppHeight() - 780);
-	  level_three_quantity.textProperty().bind(getip("level_three_quantity").asString());
-	  addUINode(level_three_quantity);
-  }
-
-  @Override
-  protected void initInput() {
-	  
+	  displayQuantity(Level.ONE);
+	  displayQuantity(Level.TWO);
+	  displayQuantity(Level.THREE);
   }
   
   @Override
@@ -133,4 +111,27 @@ public class GameApp extends GameApplication {
   public void addLevelOneCard(){
     if(!level_one.empty()) FXGL.getGameWorld().addEntity(gameFactory.newLevelOneCard(level_one.pop()));
   }
+  
+  private void displayQuantity(Level level) {
+    Text quantity = new Text();
+    quantity.setFill(Color.WHITE);
+    quantity.setFont(Font.font(50));
+    quantity.setTranslateX(450);
+    switch(level) {
+      case ONE:
+        quantity.setTranslateY(getAppHeight() - 370);
+        quantity.textProperty().bind(getip("level_one_quantity").asString());
+      break;
+      case TWO:
+        quantity.setTranslateY(getAppHeight() - 575);
+        quantity.textProperty().bind(getip("level_two_quantity").asString());
+      break;
+      case THREE:
+        quantity.setTranslateY(getAppHeight() - 780);
+        quantity.textProperty().bind(getip("level_three_quantity").asString());
+      break; 
+    }
+    addUINode(quantity);
+  }
+  
 }

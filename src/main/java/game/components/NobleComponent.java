@@ -10,7 +10,6 @@ public class NobleComponent extends Component{
 	private static boolean[] grid = new boolean[5];
 	private TransformComponent position;
 	private ViewComponent view;
-	
 	private int gridX;
 	
 	 @Override
@@ -28,7 +27,7 @@ public class NobleComponent extends Component{
 		 position.setPosition(620+138*gridX, 105);
 	 }
 	 
-	 private void pop(){
+	private void pop(){
 		    position.setScaleX(0.18);
 		    position.setScaleY(0.18);
 		  }

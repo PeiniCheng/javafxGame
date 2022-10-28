@@ -12,19 +12,14 @@ import com.almasb.fxgl.entity.components.ViewComponent;
 public class CardComponent extends Component {
   private ViewComponent view;
   private TransformComponent position;
-
   private boolean moving = false;
-
   private Direction direction;
-
   private boolean adding = false;
   private int gridX;
   private boolean purchased = false;
-
   private static boolean[] level_one_grid = new boolean[4];
   private static boolean[] level_two_grid = new boolean[4];
   private static boolean[] level_three_grid = new boolean[4];
-
   private Button buttonUp;
   private Button buttonDown;
   private Button buttonLeft;
@@ -144,7 +139,7 @@ public class CardComponent extends Component {
     }
 
   /**
-   * For demo purpose
+   * For demo purpose only
    * @param aDirection
    */
   private Button creatingButton(Direction aDirection){
